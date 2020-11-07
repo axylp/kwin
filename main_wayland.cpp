@@ -15,6 +15,7 @@
 #include "platform.h"
 #include "effects.h"
 #include "tabletmodemanager.h"
+#include "xdgactivationv1.h"
 
 #ifdef PipeWire_FOUND
 #include "screencast/screencastmanager.h"
@@ -152,6 +153,7 @@ void ApplicationWayland::performStartup()
     InputMethod::create(this);
     createBackend();
     TabletModeManager::create(this);
+    new XdgActivationV1Integration(this);
 #ifdef PipeWire_FOUND
     new ScreencastManager(this);
 #endif

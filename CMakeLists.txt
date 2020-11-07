@@ -780,6 +780,7 @@ ecm_qt_declare_logging_category(kwin_XWAYLAND_SRCS
 set(kwin_WAYLAND_SRCS
    main_wayland.cpp
    tabletmodemanager.cpp
+   xdgactivationv1.cpp
 )
 ecm_qt_declare_logging_category(kwin_WAYLAND_SRCS
     HEADER
