@@ -27,8 +27,8 @@
 namespace KWin
 {
 
-ScreencastManager::ScreencastManager(QObject *parent)
-    : QObject(parent)
+ScreencastManager::ScreencastManager(QObject *parent, const QVariantList &)
+    : Plugin(parent)
     , m_screencast(waylandServer()->display()->createScreencastV1Interface(this))
 {
     connect(m_screencast, &KWaylandServer::ScreencastV1Interface::windowScreencastRequested,

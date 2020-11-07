@@ -14,11 +14,9 @@
 // kwin
 #include "platform.h"
 #include "effects.h"
+#include "pluginmanager.h"
 #include "tabletmodemanager.h"
 
-#ifdef PipeWire_FOUND
-#include "screencast/screencastmanager.h"
-#endif
 #include "wayland_server.h"
 #include "xwl/xwayland.h"
 
@@ -152,9 +150,7 @@ void ApplicationWayland::performStartup()
     InputMethod::create(this);
     createBackend();
     TabletModeManager::create(this);
-#ifdef PipeWire_FOUND
-    new ScreencastManager(this);
-#endif
+    PluginManager::create(this);
 }
 
 void ApplicationWayland::createBackend()

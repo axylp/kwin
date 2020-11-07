@@ -1,8 +1,7 @@
 cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
 
-project(KWin)
-set(PROJECT_VERSION "5.20.80")
-set(PROJECT_VERSION_MAJOR 5)
+set(PROJECT_VERSION "5.20.80") # Handled by release scripts
+project(KWin VERSION ${PROJECT_VERSION})
 
 set(QT_MIN_VERSION "5.15.0")
 set(KF5_MIN_VERSION "5.74")
@@ -506,6 +505,8 @@ set(kwin_SRCS
     overlaywindow.cpp
     placement.cpp
     platform.cpp
+    plugin.cpp
+    pluginmanager.cpp
     pointer_input.cpp
     popup_input_filter.cpp
     rootinfo_filter.cpp
@@ -781,30 +782,8 @@ set(kwin_WAYLAND_SRCS
    main_wayland.cpp
    tabletmodemanager.cpp
 )
-ecm_qt_declare_logging_category(kwin_WAYLAND_SRCS
-    HEADER
-        kwinscreencast_logging.h
-    IDENTIFIER
-        KWIN_SCREENCAST
-    CATEGORY_NAME
-        kwin_screencast
-    DEFAULT_SEVERITY
-        Warning
-)
 
 add_executable(kwin_wayland ${kwin_WAYLAND_SRCS} ${kwin_XWAYLAND_SRCS})
-
-
-if (PipeWire_FOUND)
-    target_sources(kwin_wayland
-        PRIVATE
-        screencast/eglnativefence.cpp
-        screencast/screencastmanager.cpp
-        screencast/pipewirecore.cpp
-        screencast/pipewirestream.cpp)
-    target_link_libraries(kwin_wayland PkgConfig::PipeWire)
-endif()
-
 target_link_libraries(kwin_wayland
                       kwin
                       KF5::Crash
